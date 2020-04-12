@@ -2,8 +2,7 @@ import tensorflow as tf
 import universal_transformer_modified
 
 class U2GNN(object):
-    def __init__(self, feature_dim_size, hparams_batch_size, ff_hidden_size,
-                 seq_length, num_classes, num_hidden_layers, k_num_GNN_layers=2):
+    def __init__(self, feature_dim_size, hparams_batch_size, ff_hidden_size, seq_length, num_classes, num_hidden_layers, k_num_GNN_layers=2):
         # Placeholders for input, output
         self.input_x = tf.compat.v1.placeholder(tf.int32, [None, seq_length], name="input_x")
         self.graph_pool = tf.compat.v1.sparse_placeholder(tf.float32, [None, None], name="graph_pool")

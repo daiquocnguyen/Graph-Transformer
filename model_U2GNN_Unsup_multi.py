@@ -2,8 +2,7 @@ import tensorflow as tf
 import universal_transformer_modified
 
 class U2GNN(object):
-    def __init__(self, vocab_size, feature_dim_size, hparams_batch_size, ff_hidden_size, num_sampled,
-                 seq_length, num_hidden_layers, k_num_GNN_layers=2):
+    def __init__(self, vocab_size, feature_dim_size, hparams_batch_size, ff_hidden_size, num_sampled, seq_length, num_hidden_layers, k_num_GNN_layers=2):
         # Placeholders for input, output
         self.X_concat = tf.compat.v1.placeholder(tf.float32, [None, feature_dim_size], name="X_concat")
         self.input_x = tf.compat.v1.placeholder(tf.int32, [None, seq_length], name="input_x")
