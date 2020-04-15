@@ -1,6 +1,11 @@
 import tensorflow as tf
 import numpy as np
 
+'''
+    Thomas N. Kipf, Max Welling. 2017. Semi-Supervised Classification with Graph Convolutional Networks. ICLR.
+    Modified from https://github.com/tkipf/gcn/blob/master/gcn/layers.py
+'''
+
 def uniform(shape, scale=0.05, name=None):
     """Uniform init."""
     initial = tf.random_uniform(shape, minval=-scale, maxval=scale, dtype=tf.float32)
