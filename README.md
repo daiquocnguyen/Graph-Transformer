@@ -40,7 +40,7 @@ Regarding our unsupervised U2GNN:
 	
 	U2GNN$ python train_U2GNN_Unsup.py --dataset PTC --batch_size 2 --degree_as_tag --ff_hidden_size 1024 --num_neighbors 4 --num_sampled 512 --num_epochs 50 --num_hidden_layers 2 --learning_rate 0.0001 --model_name PTC_bs2_dro05_1024_4_idx0_2_2
 
-NOTE THAT we train our "unsupervised" U2GNN on all nodes from the entire dataset (i.e., the union of training and test sets) as some unsupervised approaches, e.g., DGK and AWE, already did. Besides, we follow the GIN paper to use the same data splitting and the same 10 cross-validation scheme that calculates an averaged accuracy at each training epoch across the 10 folds, and then selects a single epoch that maximizes the averaged accuracy.
+NOTE THAT we train our "unsupervised" U2GNN on all nodes from the entire dataset (i.e., the union of training and test sets) as some unsupervised approaches, e.g., DGK, Graph2Vec, AWE and InfoGraph, already did. Besides, we follow the GIN paper to use the same data splitting and the same 10 cross-validation scheme that calculates an averaged accuracy at each training epoch across the 10 folds, and then selects a single epoch that maximizes the averaged accuracy.
 
 ## Cite  
 Please cite the paper whenever U2GNN is used to produce published results or incorporated into other software:
