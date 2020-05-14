@@ -42,17 +42,17 @@ Regarding our unsupervised U2GNN:
 	
 	U2GNN$ python train_U2GNN_Unsup.py --dataset PTC --batch_size 2 --degree_as_tag --ff_hidden_size 1024 --num_neighbors 4 --num_sampled 512 --num_epochs 50 --num_hidden_layers 2 --learning_rate 0.0001 --model_name PTC_bs2_dro05_1024_4_idx0_2_2
 
-NOTE THAT we train our "unsupervised" U2GNN on all nodes from the entire dataset (i.e., the union of training and test sets) as some unsupervised approaches, e.g., DGK, Graph2Vec, AWE and InfoGraph, already did. Besides, we follow the GIN paper to use the same data splits and the same 10 cross-validation scheme that calculates an averaged accuracy at each training epoch across the 10 folds, and then selects a single epoch that maximizes the averaged accuracy.
+NOTE THAT we follow some unsupervised approaches (such as DGK, Graph2Vec, AWE, and InfoGraph) to use all nodes from the entire dataset (i.e., the union of training and test sets) during training our "unsupervised" U2GNN, as most of the recent supervised works cite the accuracy results of the unsupervised ones and accept the difference in the training data.
 
 ## Cite  
 Please cite the paper whenever U2GNN is used to produce published results or incorporated into other software:
 
-	 @article{Nguyen2019U2GNN,
-		  author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
-		  title={{Universal Self-Attention Network for Graph Classification}},
-		  journal={arXiv preprint arXiv:1909.11855},
-		  year={2019}
-		  }
+	@article{Nguyen2019U2GNN,
+		author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
+		title={{Universal Self-Attention Network for Graph Classification}},
+		journal={arXiv preprint arXiv:1909.11855},
+		year={2019}
+	}
 
 ## License
 As a free open-source implementation, U2GNN is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. All other warranties including, but not limited to, merchantability and fitness for purpose, whether express, implied, or arising by operation of law, course of dealing, or trade usage are hereby disclaimed. I believe that the programs compute what I claim they compute, but I do not guarantee this. The programs may be poorly and inconsistently documented and may contain undocumented components, features or modifications. I make no guarantee that these programs will be suitable for any application.
