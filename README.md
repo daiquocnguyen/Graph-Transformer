@@ -11,10 +11,9 @@
 <a href="https://github.com/daiquocnguyen/U2GNN/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/daiquocnguyen/U2GNN"></a>
 <img alt="GitHub" src="https://img.shields.io/github/license/daiquocnguyen/U2GNN">
 
-• This program provides the implementation of our U2GNN as described in our paper: [Universal Self-Attention Network for Graph Classification](https://arxiv.org/abs/1909.11855), where we use a transformer self-attention network to learn node and graph embeddings. In general, our supervised and unsupervised U2GNN models produce new highest accuracies on most of the benchmark datasets. 
+• This program provides the implementation of our U2GNN as described in our paper: [Universal Self-Attention Network for Graph Classification](https://arxiv.org/abs/1909.11855), where we induce an advanced aggregation function using a transformer self-attention network to produce plausible node and graph embeddings. In general, our supervised and unsupervised U2GNN models produce state-of-the-art accuracies on most of the benchmark datasets. 
 
-• Regarding our unsupervised learning, we encode the substructure around a given node into a vector. We then make this encoded vector and the embedding of the given node higher than that between the encoded vector and and the embeddings of the other nodes. Thus, we can teach a model to recognize and distinguish the substructures within each graph to produce the plausible node and graph embeddings. To the best of our knowledge, this work is the first study of using our unsupervised learning to train a GNN-based model to improve classification performance significantly.
-
+• Regarding our unsupervised learning, our goal is to recognize and distinguish substructures within each graph, leading to identify structural differences among graphs effectively. To obtain this goal, the aggregation function is to encode the substructure around a given node into a vector. Then we make the similarity between this encoded vector and the embedding of the given node higher than that between the encoded vector and the embeddings of the other nodes. To the best of our knowledge, our unsupervised learning is the first to improve classification performance of unsupervised GNNs significantly.
 
 <p align="center">
 	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/U2GNN.png">
