@@ -28,6 +28,7 @@ class SampledSoftmax(nn.Module):
         sample_values = self.sampler.sample(self.nsampled, labels.data.cpu().numpy())
         return self.sampled(inputs, labels, sample_values, remove_accidental_match=True)
 
+    """A modified function to implement the sampled softmax loss objective in the paper: On Using Very Large Target Vocabulary for Neural Machine Translation"""
     def sampled(self, inputs, labels, sample_values, remove_accidental_match=False):
         assert(inputs.data.get_device() == labels.data.get_device())
 
