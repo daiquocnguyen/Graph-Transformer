@@ -4,6 +4,8 @@ import random
 import scipy.sparse as sp
 from sklearn.model_selection import StratifiedKFold
 
+"""Adapted from https://github.com/weihua916/powerful-gnns/blob/master/util.py"""
+
 class S2VGraph(object):
     def __init__(self, g, label, node_tags=None, node_features=None):
         '''
@@ -140,6 +142,7 @@ def separate_data(graph_list, fold_idx, seed=0):
 
     return train_graph_list, test_graph_list
 
+"""Get indexes of train and test sets"""
 def separate_data_idx(graph_list, fold_idx, seed=0):
     assert 0 <= fold_idx and fold_idx < 10, "fold_idx must be from 0 to 9."
     skf = StratifiedKFold(n_splits=10, shuffle=True, random_state=seed)
@@ -152,9 +155,8 @@ def separate_data_idx(graph_list, fold_idx, seed=0):
 
     return train_idx, test_idx
 
-
+"""Convert sparse matrix to tuple representation."""
 def sparse_to_tuple(sparse_mx):
-    """Convert sparse matrix to tuple representation."""
     def to_tuple(mx):
         if not sp.isspmatrix_coo(mx):
             mx = mx.tocoo()
