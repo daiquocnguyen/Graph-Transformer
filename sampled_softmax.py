@@ -36,10 +36,10 @@ class SampledSoftmax(nn.Module):
 
         sample_ids = Variable(torch.LongTensor(sample_ids)).to(self.device)
 
-        # gather true labels - weights and frequencies
+        # gather true labels
         true_weights = torch.index_select(self.params.weight, 0, labels)
 
-        # gather sample ids - weights and frequencies
+        # gather sample ids
         sample_weights = torch.index_select(self.params.weight, 0, sample_ids)
 
         # calculate logits
