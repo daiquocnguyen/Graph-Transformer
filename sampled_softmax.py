@@ -1,5 +1,3 @@
-'''SampledSoftmax is taken from https://github.com/rdspring1/PyTorch_GBW_LM/blob/master/lm/model.py'''
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -8,7 +6,7 @@ import math
 
 from log_uniform import LogUniformSampler
 
-"""Modified from https://github.com/rdspring1/PyTorch_GBW_LM/blob/master/lm/model.py"""
+"""LogUniformSampler is taken from https://github.com/rdspring1/PyTorch_GBW_LM"""
 
 class SampledSoftmax(nn.Module):
     def __init__(self, ntokens, nsampled, nhid, device):
@@ -28,7 +26,8 @@ class SampledSoftmax(nn.Module):
         sample_values = self.sampler.sample(self.nsampled, labels.data.cpu().numpy())
         return self.sampled(inputs, labels, sample_values, remove_accidental_match=True)
 
-    """A modified function to implement the sampled softmax loss objective in the paper: On Using Very Large Target Vocabulary for Neural Machine Translation"""
+    """@Dai Quoc Nguyen: Implement the sampled softmax loss function as described in the paper
+    On Using Very Large Target Vocabulary for Neural Machine Translation https://www.aclweb.org/anthology/P15-1001/"""
     def sampled(self, inputs, labels, sample_values, remove_accidental_match=False):
         assert(inputs.data.get_device() == labels.data.get_device())
 
@@ -44,8 +43,8 @@ class SampledSoftmax(nn.Module):
         sample_weights = torch.index_select(self.params.weight, 0, sample_ids)
 
         # calculate logits
-        true_logits = torch.exp(torch.sum(torch.mul(inputs, true_weights), dim=1)) # + true_bias
-        sample_logits = torch.exp(torch.matmul(inputs, torch.t(sample_weights))) # + sample_bias
+        true_logits = torch.exp(torch.sum(torch.mul(inputs, true_weights), dim=1))
+        sample_logits = torch.exp(torch.matmul(inputs, torch.t(sample_weights)))
 
         logits = -torch.log(true_logits / torch.sum(sample_logits, dim=1))
 
