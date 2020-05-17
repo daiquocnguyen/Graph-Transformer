@@ -34,7 +34,7 @@ parser.add_argument("--model_name", default='PTC', help="")
 parser.add_argument('--sampled_num', default=512, type=int, help='')
 parser.add_argument("--dropout", default=0.5, type=float, help="")
 parser.add_argument("--num_hidden_layers", default=2, type=int, help="")
-parser.add_argument("--num_self_att_layers", default=1, type=int, help="Number of self-attention layers within each U2GNN layer")
+parser.add_argument("--num_self_att_layers", default=1, type=int, help="Timestep T ~ Number of self-attention layers within each U2GNN layer")
 parser.add_argument("--ff_hidden_size", default=1024, type=int, help="The hidden size for the feedforward layer")
 parser.add_argument("--num_neighbors", default=4, type=int, help="")
 parser.add_argument('--fold_idx', type=int, default=1, help='The fold index. 0-9.')
@@ -141,7 +141,7 @@ print("Loading data... finished!")
 model = TransformerU2GNN(feature_dim_size=feature_dim_size, ff_hidden_size=args.ff_hidden_size,
                         dropout=args.dropout, num_self_att_layers=args.num_self_att_layers,
                         vocab_size=vocab_size, sampled_num=args.sampled_num,
-                        num_U2GNN_layers=args.num_hidden_layers, device=device)
+                        num_U2GNN_layers=args.num_hidden_layers, device=device).to(device)
 
 optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
 num_batches_per_epoch = int((len(graphs) - 1) / args.batch_size) + 1
