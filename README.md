@@ -23,7 +23,7 @@
 
 ### News
 
-- 17-05-2020: Update Pytorch (1.5.0) implementation. Before running, you should change to the `log_uniform` directory and run a `make` command to use `SampledSoftmax` because Pytorch 1.5.0 still does not have an official sampled softmax loss function.
+- 17-05-2020: Update Pytorch (1.5.0) implementation. Before running, you should change to the `log_uniform` directory and run a `make` command to use `SampledSoftmax` (because Pytorch 1.5.0 still does not have an official sampled softmax loss function).
 
 ### Requirements
 - Python 	3.x
