@@ -166,7 +166,7 @@ def evaluate():
     model.eval() # Turn on the evaluation mode
     with torch.no_grad():
         # evaluating
-        node_embeddings = model.ss.params.weight
+        node_embeddings = model.ss.weight
         graph_embeddings = torch.spmm(graph_pool, node_embeddings).data.cpu().numpy()
         acc_10folds = []
         for fold_idx in range(10):

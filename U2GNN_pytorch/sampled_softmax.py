@@ -15,11 +15,16 @@ class SampledSoftmax(nn.Module):
         # Parameters
         self.ntokens = ntokens
         self.nsampled = nsampled
-
-        self.sampler = LogUniformSampler(self.ntokens)
-        self.params = nn.Linear(nhid, ntokens)
-
         self.device = device
+        #
+        self.sampler = LogUniformSampler(self.ntokens)
+        #
+        self.weight = nn.Parameter(torch.Tensor(ntokens, nhid))
+        self.reset_parameters()
+
+    def reset_parameters(self):
+        stdv = math.sqrt(6.0 / (self.weight.size(0) + self.weight.size(1)))
+        self.weight.data.uniform_(-stdv, stdv)
 
     def forward(self, inputs, labels):
         # sample ids according to word distribution - Unique
@@ -37,10 +42,10 @@ class SampledSoftmax(nn.Module):
         sample_ids = Variable(torch.LongTensor(sample_ids)).to(self.device)
 
         # gather true labels
-        true_weights = torch.index_select(self.params.weight, 0, labels)
+        true_weights = torch.index_select(self.weight, 0, labels)
 
         # gather sample ids
-        sample_weights = torch.index_select(self.params.weight, 0, sample_ids)
+        sample_weights = torch.index_select(self.weight, 0, sample_ids)
 
         # calculate logits
         true_logits = torch.exp(torch.sum(torch.mul(inputs, true_weights), dim=1))
