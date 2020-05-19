@@ -29,11 +29,11 @@ class SampledSoftmax(nn.Module):
     def forward(self, inputs, labels):
         # sample ids according to word distribution - Unique
         sample_values = self.sampler.sample(self.nsampled, labels.data.cpu().numpy())
-        return self.sampled(inputs, labels, sample_values, remove_accidental_match=True)
+        return self.sampled(inputs, labels, sample_values)
 
     """@Dai Quoc Nguyen: Implement the sampled softmax loss function as described in the paper
     On Using Very Large Target Vocabulary for Neural Machine Translation https://www.aclweb.org/anthology/P15-1001/"""
-    def sampled(self, inputs, labels, sample_values, remove_accidental_match=False):
+    def sampled(self, inputs, labels, sample_values):
         assert(inputs.data.get_device() == labels.data.get_device())
 
         batch_size, d = inputs.size()

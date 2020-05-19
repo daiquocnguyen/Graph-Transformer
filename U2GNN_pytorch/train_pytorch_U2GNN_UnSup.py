@@ -97,7 +97,9 @@ def get_idx_nodes(selected_graph_idx):
     idx_nodes = torch.cat(idx_nodes)
     return idx_nodes.to(device)
 
-def get_batch_data(batch_graph):
+def get_batch_data(selected_idx):
+    batch_graph = [graphs[idx] for idx in selected_idx]
+
     X_concat = np.concatenate([graph.node_features for graph in batch_graph], 0)
     if "REDDIT" in args.dataset:
         X_concat = np.tile(X_concat, feature_dim_size) #[1,1,1,1]
@@ -120,21 +122,17 @@ def get_batch_data(batch_graph):
     input_x = np.array(input_neighbors)
     input_x = torch.from_numpy(input_x).to(device)
 
-    return X_concat, input_x
+    input_y = get_idx_nodes(selected_idx)
+
+    return X_concat, input_x, input_y
 
 class Batch_Loader(object):
     def __call__(self):
         selected_idx = np.random.permutation(len(graphs))[:args.batch_size]
-        batch_graph = [graphs[idx] for idx in selected_idx]
-        X_concat, input_x = get_batch_data(batch_graph)
-        input_y = get_idx_nodes(selected_idx)
+        X_concat, input_x, input_y = get_batch_data(selected_idx)
         return X_concat, input_x, input_y
 
 batch_nodes = Batch_Loader()
-
-# X_concat, input_x, input_y = batch_nodes()
-# print(input_x)
-# print(X_concat)
 
 print("Loading data... finished!")
 
