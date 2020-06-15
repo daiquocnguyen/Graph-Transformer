@@ -13,7 +13,7 @@
 
 - This program provides the implementation of our U2GNN as described in our paper, titled [Universal Self-Attention Network for Graph Classification](https://arxiv.org/abs/1909.11855), where we induce an advanced aggregation function using a transformer self-attention network to produce plausible node and graph embeddings. In general, our supervised and unsupervised U2GNN models produce state-of-the-art accuracies on most of the benchmark datasets. 
 
-- Regarding our unsupervised learning, we view the aggregation function as an encoder to encode the substructure around a given node into a vector. Then we make the similarity between this encoded vector and the embedding of the given node higher than that between the encoded vector and the embeddings of the other nodes. As a result, our unsupervised learning helps to recognize and distinguish substructures within each graph, leading to effectively identify structural differences among graphs.
+- Regarding our unsupervised learning, we use the U2GNN aggregation function as an encoder to encode the substructure around a given node into a vector; then, we make the similarity between this encoded vector and the embedding of the given node higher than that between the encoded vector and the embeddings of the other nodes. As a result, our unsupervised learning is to recognize and distinguish substructures within each graph, leading to effectively identify structural differences among graphs.
 
 <p align="center">
 	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/U2GNN.png">
