@@ -12,6 +12,10 @@ class U2GNN(object):
 
         #Inputs for Universal Transformer
         self.input_UT = tf.nn.embedding_lookup(self.X_concat, self.input_x)
+        #
+        self.output_target_node = tf.split(self.input_UT, num_or_size_splits=seq_length, axis=1)[0]
+        self.output_target_node = tf.squeeze(self.output_target_node, axis=1)
+        #
         self.input_UT = tf.reshape(self.input_UT, [-1, seq_length, 1, feature_dim_size])
 
         #Matrix weights in Universal Transformer are shared across each attention layer (timestep), while they are not in Transformer.
@@ -30,8 +34,19 @@ class U2GNN(object):
         self.hparams.add_sru = False
         self.hparams.add_or_concat_timing_signal = None
 
-        #Construct k GNN layers
+        # Construct k GNN layers
         self.scores = 0
+        # graph pooling for feature vectors
+        self.graph_embeddings = tf.compat.v1.sparse_tensor_dense_matmul(self.graph_pool, self.output_target_node)
+        self.graph_embeddings = tf.nn.dropout(self.graph_embeddings, keep_prob=self.dropout_keep_prob)
+        #
+        with tf.variable_scope("layer_fv"):
+            W = tf.compat.v1.get_variable(shape=[feature_dim_size, num_classes],
+                                          initializer=tf.contrib.layers.xavier_initializer(),
+                                          name="W_layer_fv")
+            b = tf.Variable(tf.zeros([num_classes]))
+            self.scores += tf.compat.v1.nn.xw_plus_b(self.graph_embeddings, W, b)
+
         for layer in range(k_num_GNN_layers):  # the number k of multiple stacked layers, each stacked layer includes a number of self-attention layers
             # Universal Transformer Encoder
             self.ute = universal_transformer_modified.UniversalTransformerEncoder1(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
