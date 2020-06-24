@@ -31,7 +31,7 @@ parser.add_argument("--num_epochs", default=50, type=int, help="Number of traini
 parser.add_argument("--model_name", default='PTC', help="")
 parser.add_argument('--sampled_num', default=512, type=int, help='')
 parser.add_argument("--dropout", default=0.5, type=float, help="")
-parser.add_argument("--num_hidden_layers", default=2, type=int, help="")
+parser.add_argument("--num_hidden_layers", default=1, type=int, help="")
 parser.add_argument("--num_self_att_layers", default=1, type=int, help="Timestep T ~ Number of self-attention layers within each U2GNN layer")
 parser.add_argument("--ff_hidden_size", default=1024, type=int, help="The hidden size for the feedforward layer")
 parser.add_argument("--num_neighbors", default=4, type=int, help="")
