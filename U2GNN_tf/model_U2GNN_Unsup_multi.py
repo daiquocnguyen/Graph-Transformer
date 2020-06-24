@@ -2,7 +2,7 @@ import tensorflow as tf
 import universal_transformer_modified
 
 class U2GNN(object):
-    def __init__(self, vocab_size, feature_dim_size, hparams_batch_size, ff_hidden_size, num_sampled, seq_length, num_hidden_layers, k_num_GNN_layers=2):
+    def __init__(self, vocab_size, feature_dim_size, hparams_batch_size, ff_hidden_size, num_sampled, seq_length, num_self_att_layers, num_U2GNN_layers=1):
         # Placeholders for input, output
         self.X_concat = tf.compat.v1.placeholder(tf.float32, [None, feature_dim_size], name="X_concat")
         self.input_x = tf.compat.v1.placeholder(tf.int32, [None, seq_length], name="input_x")
@@ -19,7 +19,7 @@ class U2GNN(object):
         self.hparams.hidden_size = feature_dim_size
         self.hparams.batch_size = hparams_batch_size * seq_length
         self.hparams.max_length = seq_length
-        self.hparams.num_hidden_layers = num_hidden_layers # Number of attention layers: the number T of timesteps in Universal Transformer, not the number of the GNN layers
+        self.hparams.num_hidden_layers = num_self_att_layers # Number of attention layers: the number T of timesteps in Universal Transformer
         self.hparams.num_heads = 1 #due to the fact that the feature embedding sizes are various
         self.hparams.filter_size = ff_hidden_size
         self.hparams.use_target_space_embedding = False
@@ -31,7 +31,7 @@ class U2GNN(object):
 
         self.output_vectors = []
         #Construct k GNN layers
-        for layer in range(k_num_GNN_layers):  # the number k of multiple stacked layers, each stacked layer includes a number of self-attention layers
+        for layer in range(num_U2GNN_layers):  # The number k of multiple stacked layers, each stacked layer includes a number of self-attention layers
             # Universal Transformer Encoder
             self.ute = universal_transformer_modified.UniversalTransformerEncoder1(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
             self.output_UT = self.ute({"inputs": self.input_UT, "targets": 0, "target_space_id": 0})[0]
@@ -50,7 +50,7 @@ class U2GNN(object):
 
         with tf.name_scope("embedding"):
             self.embedding_matrix = tf.compat.v1.get_variable(
-                    "W", shape=[vocab_size, feature_dim_size*k_num_GNN_layers], initializer=tf.contrib.layers.xavier_initializer())
+                    "W", shape=[vocab_size, feature_dim_size*num_U2GNN_layers], initializer=tf.contrib.layers.xavier_initializer())
             self.softmax_biases = tf.Variable(tf.zeros([vocab_size]))
 
         self.total_loss = tf.reduce_mean(

@@ -2,7 +2,7 @@ import tensorflow as tf
 import universal_transformer_modified
 
 class U2GNN(object):
-    def __init__(self, feature_dim_size, hparams_batch_size, ff_hidden_size, seq_length, num_classes, num_hidden_layers, k_num_GNN_layers=2):
+    def __init__(self, feature_dim_size, hparams_batch_size, ff_hidden_size, seq_length, num_classes, num_self_att_layers, num_U2GNN_layers=1):
         # Placeholders for input, output
         self.input_x = tf.compat.v1.placeholder(tf.int32, [None, seq_length], name="input_x")
         self.graph_pool = tf.compat.v1.sparse_placeholder(tf.float32, [None, None], name="graph_pool")
@@ -12,10 +12,10 @@ class U2GNN(object):
 
         #Inputs for Universal Transformer
         self.input_UT = tf.nn.embedding_lookup(self.X_concat, self.input_x)
-        #
-        self.output_target_node = tf.split(self.input_UT, num_or_size_splits=seq_length, axis=1)[0]
-        self.output_target_node = tf.squeeze(self.output_target_node, axis=1)
-        #
+        # #
+        # self.output_target_node = tf.split(self.input_UT, num_or_size_splits=seq_length, axis=1)[0]
+        # self.output_target_node = tf.squeeze(self.output_target_node, axis=1)
+        # #
         self.input_UT = tf.reshape(self.input_UT, [-1, seq_length, 1, feature_dim_size])
 
         #Matrix weights in Universal Transformer are shared across each attention layer (timestep), while they are not in Transformer.
@@ -24,7 +24,7 @@ class U2GNN(object):
         self.hparams.hidden_size = feature_dim_size
         self.hparams.batch_size = hparams_batch_size * seq_length
         self.hparams.max_length = seq_length
-        self.hparams.num_hidden_layers = num_hidden_layers  # Number of attention layers: the number T of timesteps in Universal Transformer, not the number of the GNN layers
+        self.hparams.num_hidden_layers = num_self_att_layers  # Number of attention layers: the number T of timesteps in Universal Transformer
         self.hparams.num_heads = 1  # due to the fact that the feature embedding sizes are various
         self.hparams.filter_size = ff_hidden_size
         self.hparams.use_target_space_embedding = False
@@ -36,18 +36,18 @@ class U2GNN(object):
 
         # Construct k GNN layers
         self.scores = 0
-        # graph pooling for feature vectors
-        self.graph_embeddings = tf.compat.v1.sparse_tensor_dense_matmul(self.graph_pool, self.output_target_node)
-        self.graph_embeddings = tf.nn.dropout(self.graph_embeddings, keep_prob=self.dropout_keep_prob)
-        #
-        with tf.variable_scope("layer_fv"):
-            W = tf.compat.v1.get_variable(shape=[feature_dim_size, num_classes],
-                                          initializer=tf.contrib.layers.xavier_initializer(),
-                                          name="W_layer_fv")
-            b = tf.Variable(tf.zeros([num_classes]))
-            self.scores += tf.compat.v1.nn.xw_plus_b(self.graph_embeddings, W, b)
+        # # graph pooling for feature vectors
+        # self.graph_embeddings = tf.compat.v1.sparse_tensor_dense_matmul(self.graph_pool, self.output_target_node)
+        # self.graph_embeddings = tf.nn.dropout(self.graph_embeddings, keep_prob=self.dropout_keep_prob)
+        # #
+        # with tf.variable_scope("layer_fv"):
+        #     W = tf.compat.v1.get_variable(shape=[feature_dim_size, num_classes],
+        #                                   initializer=tf.contrib.layers.xavier_initializer(),
+        #                                   name="W_layer_fv")
+        #     b = tf.Variable(tf.zeros([num_classes]))
+        #     self.scores += tf.compat.v1.nn.xw_plus_b(self.graph_embeddings, W, b)
 
-        for layer in range(k_num_GNN_layers):  # the number k of multiple stacked layers, each stacked layer includes a number of self-attention layers
+        for layer in range(num_U2GNN_layers):  # the number k of multiple stacked layers, each stacked layer includes a number of self-attention layers
             # Universal Transformer Encoder
             self.ute = universal_transformer_modified.UniversalTransformerEncoder1(self.hparams, mode=tf.estimator.ModeKeys.TRAIN)
             self.output_UT = self.ute({"inputs": self.input_UT, "targets": 0, "target_space_id": 0})[0]

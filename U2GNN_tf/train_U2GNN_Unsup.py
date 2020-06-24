@@ -34,7 +34,7 @@ parser.add_argument("--log_device_placement", default=False, type=bool, help="Lo
 parser.add_argument("--model_name", default='PTC', help="")
 parser.add_argument('--num_sampled', default=512, type=int, help='')
 parser.add_argument("--dropout_keep_prob", default=1.0, type=float, help="Dropout keep probability")
-parser.add_argument("--num_hidden_layers", default=6, type=int, help="Number of attention layers: the number T of timesteps in Universal Transformer")
+parser.add_argument("--num_timesteps", default=6, type=int, help="Number of attention layers in Transformer. The number T of timesteps in Universal Transformer")
 parser.add_argument("--num_heads", default=1, type=int, help="Number of attention heads within each attention layer")
 parser.add_argument("--ff_hidden_size", default=1024, type=int, help="The hidden size for the feedforward layer")
 parser.add_argument("--num_neighbors", default=8, type=int, help="")
@@ -148,13 +148,14 @@ with tf.Graph().as_default():
     sess = tf.compat.v1.Session(config=session_conf)
     with sess.as_default():
         global_step = tf.Variable(0, name="global_step", trainable=False)
-        u_2_gan = U2GNN(num_hidden_layers=args.num_hidden_layers,
-                      vocab_size=graph_pool.shape[1],
-                      hparams_batch_size=hparams_batch_size,
-                      num_sampled=args.num_sampled,
-                      feature_dim_size=feature_dim_size,
-                      ff_hidden_size=args.ff_hidden_size,
-                      seq_length=args.num_neighbors+1
+        u_2_gan = U2GNN(num_self_att_layers=args.num_timesteps,
+                        vocab_size=graph_pool.shape[1],
+                        hparams_batch_size=hparams_batch_size,
+                        num_sampled=args.num_sampled,
+                        feature_dim_size=feature_dim_size,
+                        ff_hidden_size=args.ff_hidden_size,
+                        seq_length=args.num_neighbors+1,
+                        num_U2GNN_layers=1
                   )
 
         # Define Training procedure
@@ -162,7 +163,7 @@ with tf.Graph().as_default():
         grads_and_vars = optimizer.compute_gradients(u_2_gan.total_loss)
         train_op = optimizer.apply_gradients(grads_and_vars, global_step=global_step)
 
-        out_dir = os.path.abspath(os.path.join(args.run_folder, "../runs_U2GNN_Unsup_K2", args.model_name))
+        out_dir = os.path.abspath(os.path.join(args.run_folder, "../runs_U2GNN_Unsup", args.model_name))
         print("Writing to {}\n".format(out_dir))
 
         # Checkpoint directory. Tensorflow assumes this directory already exists so we need to create it
