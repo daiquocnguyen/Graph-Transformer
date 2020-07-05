@@ -11,7 +11,7 @@
 <a href="https://github.com/daiquocnguyen/U2GNN/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/daiquocnguyen/U2GNN"></a>
 <img alt="GitHub" src="https://img.shields.io/github/license/daiquocnguyen/U2GNN">
 
-- This program provides the implementation of our U2GNN as described in our paper, titled [Universal Self-Attention Network for Graph Classification](https://arxiv.org/pdf/1909.11855.pdf), where we induce an advanced aggregation function using a transformer self-attention network to produce plausible node and graph embeddings. In general, our supervised and unsupervised U2GNN models produce state-of-the-art accuracies on benchmark datasets.
+This program provides the implementation of our U2GNN as described in our paper, titled [Universal Self-Attention Network for Graph Classification](https://arxiv.org/pdf/1909.11855.pdf), where we induce an advanced aggregation function - using a transformer self-attention network - to produce plausible node and graph embeddings.
 
 <p align="center">
 	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/U2GNN.png">
@@ -44,9 +44,7 @@ Regarding our unsupervised U2GNN:
 	
 	U2GNN$ python train_U2GNN_Unsup.py --dataset PTC --batch_size 2 --degree_as_tag --ff_hidden_size 1024 --num_neighbors 4 --num_sampled 512 --num_epochs 50 --num_timesteps 2 --learning_rate 0.0001 --model_name PTC_bs2_dro05_1024_4_idx0_2_2
 
-- Regarding our unsupervised learning, we use the U2GNN aggregation function as an encoder to encode the substructure around a given node into a vector; then, we make the similarity between this encoded vector and the embedding of the given node higher than that between the encoded vector and the embeddings of the other nodes. As a result, our unsupervised learning is to recognize and distinguish substructures within each graph, leading to effectively identify structural differences among graphs.
-
-- NOTE THAT we follow some unsupervised approaches (such as DGK, Graph2Vec, and AWE) to use all nodes from the entire dataset (i.e., including all nodes in the test set) during training our "unsupervised" U2GNN.
+- Our unsupervised learning aims to guide a GNN model to recognize and distinguish the substructures within each graph, leading to infer the structural differences among graphs effectively. NOTE THAT we follow some unsupervised approaches (such as DGK, Graph2Vec, and AWE) to use all nodes from the entire dataset (i.e., including all nodes in the test set) during training our "unsupervised" GCN baseline and U2GNN models.
 
 ## Cite  
 Please cite the paper whenever U2GNN is used to produce published results or incorporated into other software:
