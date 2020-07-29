@@ -137,10 +137,6 @@ class Batch_Loader(object):
         return input_x, graph_pool, X_concat, one_hot_labels
 batch_nodes = Batch_Loader()
 
-# input_x, graph_pool, X_concat, one_hot_labels = batch_nodes()
-# print(input_x.shape, graph_pool.shape, X_concat.shape, one_hot_labels.shape)
-# print(one_hot_labels)
-
 print("Loading data... finished!")
 # Training
 # ==================================================
