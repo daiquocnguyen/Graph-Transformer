@@ -44,7 +44,7 @@ Regarding our unsupervised U2GNN:
 	
 	U2GNN$ python train_U2GNN_Unsup.py --dataset PTC --batch_size 2 --degree_as_tag --ff_hidden_size 1024 --num_neighbors 4 --num_sampled 512 --num_epochs 50 --num_timesteps 2 --learning_rate 0.0001 --model_name PTC_bs2_dro05_1024_4_idx0_2_2
 
-- Our unsupervised learning aims to guide a GNN model to recognize and distinguish the substructures within each graph, leading to infer the structural differences among graphs effectively. NOTE THAT we follow some unsupervised approaches (such as DGK, Graph2Vec, and AWE) to use all nodes from the entire dataset (i.e., including all nodes in the test set) during training our "unsupervised" GCN baseline and U2GNN models.
+- Our unsupervised learning aims to guide a GNN model to recognize and distinguish the substructures within each graph, leading to produce the plausible node and graph embeddings. NOTE THAT we follow some unsupervised approaches (such as DGK, Graph2Vec, and AWE) to use all nodes from the entire dataset (i.e., including all nodes in the test set) during training our "unsupervised" GCN baseline and U2GNN models.
 
 ## Cite  
 Please cite the paper whenever U2GNN is used to produce published results or incorporated into other software:
