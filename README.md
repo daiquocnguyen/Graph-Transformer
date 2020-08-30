@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/u2gnn_logo.png">
+	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/logo.png">
 </p>
 
 # Transformer for Graph Classification<a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fdaiquocnguyen%2FU2GNN%2Fblob%2Fmaster%2FREADME.md"><img alt="Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fdaiquocng"></a>
