@@ -11,7 +11,7 @@
 <a href="https://github.com/daiquocnguyen/U2GNN/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/daiquocnguyen/U2GNN"></a>
 <img alt="GitHub" src="https://img.shields.io/github/license/daiquocnguyen/U2GNN">
 
-This program provides the implementation of our U2GNN as described in our paper [Universal Graph Transformer Self-Attention Networks](https://arxiv.org/pdf/1909.11855.pdf) where we leverage the transformer self-attention network to construct an advanced aggregation function to learn graph representations.
+This program provides the implementation of our U2GNN as described in [our paper](https://arxiv.org/pdf/1909.11855.pdf), where we leverage the transformer self-attention network to construct an advanced aggregation function to learn graph representations.
 
 <p align="center">
 	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/U2GNN.png">
