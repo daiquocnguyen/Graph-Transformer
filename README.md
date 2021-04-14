@@ -42,7 +42,7 @@ Please cite the paper whenever U2GNN is used to produce published results or inc
 
 	@article{Nguyen2019U2GNN,
 		author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
-		title={{Universal Self-Attention Network for Graph Classification}},
+		title={Universal Self-Attention Network for Graph Classification},
 		journal={arXiv preprint arXiv:1909.11855},
 		year={2019}
 	}
