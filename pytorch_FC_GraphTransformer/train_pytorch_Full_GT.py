@@ -26,15 +26,12 @@ parser = ArgumentParser("U2GNN", formatter_class=ArgumentDefaultsHelpFormatter, 
 parser.add_argument("--run_folder", default="../", help="")
 parser.add_argument("--dataset", default="PTC", help="Name of the dataset.")
 parser.add_argument("--learning_rate", default=0.0005, type=float, help="Learning rate")
-parser.add_argument("--batch_size", default=4, type=int, help="Batch Size")
 parser.add_argument("--num_epochs", default=50, type=int, help="Number of training epochs")
 parser.add_argument("--model_name", default='PTC', help="")
-parser.add_argument('--sampled_num', default=512, type=int, help='')
 parser.add_argument("--dropout", default=0.5, type=float, help="")
 parser.add_argument("--num_hidden_layers", default=1, type=int, help="")
 parser.add_argument("--num_timesteps", default=1, type=int, help="Timestep T ~ Number of self-attention layers within each U2GNN layer")
 parser.add_argument("--ff_hidden_size", default=256, type=int, help="The hidden size for the feedforward layer")
-parser.add_argument("--num_neighbors", default=4, type=int, help="")
 parser.add_argument('--fold_idx', type=int, default=1, help='The fold index. 0-9.')
 args = parser.parse_args()
 
@@ -79,7 +76,7 @@ def get_data(graph):
     graph_label = np.array([graph.label])
     return Adj_block, node_features, torch.from_numpy(graph_label).to(device)
 
-Adj_block, node_features, graph_label = get_data(train_graphs[1])
+# Adj_block, node_features, graph_label = get_data(train_graphs[1])
 # print(Adj_block)
 # print(node_features)
 # print(graph_label)
@@ -94,11 +91,8 @@ model = FullyConnectedGT(feature_dim_size=feature_dim_size, ff_hidden_size=args.
 def cross_entropy(pred, soft_targets): # use nn.CrossEntropyLoss if not using soft labels in Line 159
     logsoftmax = nn.LogSoftmax(dim=1)
     return torch.mean(torch.sum(- soft_targets * logsoftmax(pred), 1))
-
 # criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
-num_batches_per_epoch = int((len(train_graphs) - 1) / args.batch_size) + 1
-scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=num_batches_per_epoch, gamma=0.1)
 
 def train():
     model.train() # Turn on the train mode
@@ -138,7 +132,7 @@ def evaluate():
 
 """main process"""
 import os
-out_dir = os.path.abspath(os.path.join(args.run_folder, "../runs_pytorch_Full_GraphTransformer", args.model_name))
+out_dir = os.path.abspath(os.path.join(args.run_folder, "../runs_pytorch_FC_GraphTransformer", args.model_name))
 print("Writing to {}\n".format(out_dir))
 # Checkpoint directory
 checkpoint_dir = os.path.abspath(os.path.join(out_dir, "checkpoints"))
