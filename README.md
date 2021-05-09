@@ -34,15 +34,16 @@ This program provides the implementation of our U2GNN as described in [our paper
 
 ### Training
 
-- Variant 1: Leveraging the self-attention mechanism directly over all nodes to train a fully-connected graph transformer:
+- Variant 1: Sampling a fixed number of neighbors for each node:
+
+		$ python train_U2GNN_Sup.py --dataset IMDBBINARY --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 8 --num_epochs 50 --num_timesteps 4 --learning_rate 0.0005 --model_name IMDBBINARY_bs4_fold1_1024_8_idx0_4_1
+	
+		$ python train_U2GNN_Sup.py --dataset PTC --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 16 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_bs4_fold1_1024_16_idx0_3_1
+
+- Variant 2: Leveraging the self-attention mechanism directly over all nodes to train a fully-connected graph transformer:
 		 
 		$ python train_pytorch_Full_GT.py --dataset PTC --ff_hidden_size 1024 --fold_idx 1 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_fold1_1024_idx0_1
 		
-- Variant 2: Sampling a fixed number of neighbors for each node:
-
-		U2GNN$ python train_U2GNN_Sup.py --dataset IMDBBINARY --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 8 --num_epochs 50 --num_timesteps 4 --learning_rate 0.0005 --model_name IMDBBINARY_bs4_fold1_1024_8_idx0_4_1
-	
-		U2GNN$ python train_U2GNN_Sup.py --dataset PTC --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 16 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_bs4_fold1_1024_16_idx0_3_1
 
 
 ## Cite  
