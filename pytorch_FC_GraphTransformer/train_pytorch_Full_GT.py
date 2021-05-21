@@ -64,7 +64,7 @@ def get_Adj_matrix(graph):
 
     Adj_block = torch.sparse.FloatTensor(Adj_block_idx, Adj_block_elem, torch.Size([num_node, num_node]))
 
-    return Adj_block.to(device)
+    return Adj_block.to(device) # should use the Laplacian re-normalized adjacency matrix like in GCN?
 
 def get_data(graph):
     node_features = graph.node_features
