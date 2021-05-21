@@ -33,7 +33,7 @@ class FullyConnectedGT(nn.Module):
             self.predictions.append(nn.Linear(self.feature_dim_size, self.num_classes))
             self.dropouts.append(nn.Dropout(dropout))
 
-    # Depend on the task, select forward or simple_forward
+    # Fine-tune to select forward or simple_forward
     def forward(self, Adj_block, node_features):
         prediction_scores = 0
         input_Tr = node_features
@@ -42,7 +42,7 @@ class FullyConnectedGT(nn.Module):
             input_Tr = torch.unsqueeze(input_Tr, 0)
             input_Tr = self.u2gnn_layers[layer_idx](input_Tr)
             input_Tr = torch.squeeze(input_Tr, 0)
-            # take a sum and a linear transformation like GCN
+            # take  a sum over neighbors followed by a linear transformation --> similar to GCN
             input_Tr = self.lst_gnn[layer_idx](input_Tr, Adj_block)
             # take a sum over all node representations to get graph representations
             graph_embedding = torch.sum(input_Tr, dim=0)
@@ -56,12 +56,14 @@ class FullyConnectedGT(nn.Module):
         prediction_scores = 0
         input_Tr = node_features
         for layer_idx in range(self.num_U2GNN_layers):
-            # take a sum over neighbors to obtain an input for the transformer self-attention network
-            input_Tr = torch.spmm(Adj_block, input_Tr)
+            # # take a sum over neighbors to obtain an input for the transformer self-attention network
+            # input_Tr = torch.spmm(Adj_block, input_Tr)
             # self-attention over all nodes
             input_Tr = torch.unsqueeze(input_Tr, 0)
             input_Tr = self.u2gnn_layers[layer_idx](input_Tr)
             input_Tr = torch.squeeze(input_Tr, 0)
+            # take a sum over neighbors
+            input_Tr = torch.spmm(Adj_block, input_Tr)
             # take a sum over all node representations to get graph representations
             graph_embedding = torch.sum(input_Tr, dim=0)
             graph_embedding = self.dropouts[layer_idx](graph_embedding)

@@ -64,7 +64,7 @@ def get_Adj_matrix(graph):
 
     Adj_block = torch.sparse.FloatTensor(Adj_block_idx, Adj_block_elem, torch.Size([num_node, num_node]))
 
-    return Adj_block.to(device) # should use the Laplacian re-normalized adjacency matrix like in GCN?
+    return Adj_block.to(device) # implement the Laplacian re-normalized adjacency matrix like in GCN ???
 
 def get_data(graph):
     node_features = graph.node_features
@@ -103,7 +103,7 @@ def train():
         Adj_block, node_features, graph_label = get_data(train_graphs[idx]) # one graph per step, i.e., bs=1
         graph_label = label_smoothing(graph_label, num_classes)
         optimizer.zero_grad()
-        prediction_score = model(Adj_block, node_features)
+        prediction_score = model.forward(Adj_block, node_features) # forward or simple_forward?
         # loss = criterion(prediction_scores, graph_labels)
         loss = cross_entropy(torch.unsqueeze(prediction_score, 0), graph_label)
         loss.backward()
@@ -121,7 +121,7 @@ def evaluate():
         prediction_output = []
         for i in range(0, len(test_graphs)):
             Adj_block, node_features, graph_label = get_data(test_graphs[i])
-            prediction_score = model(Adj_block, node_features).detach()
+            prediction_score = model.forward(Adj_block, node_features).detach()
             prediction_output.append(torch.unsqueeze(prediction_score, 0))
     prediction_output = torch.cat(prediction_output, 0)
     predictions = prediction_output.max(1, keepdim=True)[1]
