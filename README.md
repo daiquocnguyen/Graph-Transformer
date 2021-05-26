@@ -21,7 +21,7 @@ This program provides the implementation of our U2GNN as described in [our paper
 
 ### News
 
-- 04-05-2021: Release a simplified variant of U2GNN to train a fully-connected graph transformer, wherein we leverage the self-attention mechanism directly over all nodes of a given graph. This U2GNN variant is reliable if the given graph is fully-connected.
+- 04-05-2021: Release a simplified variant of U2GNN to train a fully-connected graph transformer, wherein we leverage the self-attention mechanism directly on all nodes of a given graph. This U2GNN variant is reliable if the given graph is fully-connected.
 
 - 17-05-2020: Release a Pytorch (1.5.0) implementation. 
 
@@ -40,7 +40,7 @@ This program provides the implementation of our U2GNN as described in [our paper
 	
 		$ python train_U2GNN_Sup.py --dataset PTC --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 16 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_bs4_fold1_1024_16_idx0_3_1
 
-- Variant 2: Leveraging the self-attention mechanism directly over all nodes to train a fully-connected graph transformer:
+- Variant 2: Leveraging the self-attention mechanism directly on all nodes to train a fully-connected graph transformer:
 		 
 		$ python train_pytorch_Full_GT.py --dataset PTC --ff_hidden_size 1024 --fold_idx 1 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_fold1_1024_idx0_1
 		
