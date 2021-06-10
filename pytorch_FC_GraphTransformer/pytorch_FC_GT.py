@@ -42,7 +42,7 @@ class FullyConnectedGT(nn.Module):
             input_Tr = torch.unsqueeze(input_Tr, 0)
             input_Tr = self.u2gnn_layers[layer_idx](input_Tr)
             input_Tr = torch.squeeze(input_Tr, 0)
-            # take  a sum over neighbors followed by a linear transformation --> similar to GCN
+            # take  a sum over neighbors followed by a linear transformation and an activation function --> similar to GCN
             input_Tr = self.lst_gnn[layer_idx](input_Tr, Adj_block)
             # take a sum over all node representations to get graph representations
             graph_embedding = torch.sum(input_Tr, dim=0)
