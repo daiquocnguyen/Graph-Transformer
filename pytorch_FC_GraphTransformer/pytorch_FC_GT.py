@@ -23,7 +23,7 @@ class FullyConnectedGT(nn.Module):
             # if _layer != self.num_U2GNN_layers - 1:
             #     self.lst_gnn.append(GraphConvolution(self.feature_dim_size, self.feature_dim_size, act=torch.tanh))
             # else:
-            self.lst_gnn.append(GraphConvolution(self.feature_dim_size, self.feature_dim_size, act=lambda x: x))
+            self.lst_gnn.append(GraphConvolution(self.feature_dim_size, self.feature_dim_size, act=torch.tanh))
 
         # Linear function
         self.predictions = torch.nn.ModuleList()
