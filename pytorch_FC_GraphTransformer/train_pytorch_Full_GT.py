@@ -30,6 +30,7 @@ parser.add_argument("--num_epochs", default=50, type=int, help="Number of traini
 parser.add_argument("--model_name", default='PTC', help="")
 parser.add_argument("--dropout", default=0.5, type=float, help="")
 parser.add_argument("--num_hidden_layers", default=1, type=int, help="")
+parser.add_argument("--nhead", default=1, type=int, help="")
 parser.add_argument("--num_timesteps", default=1, type=int, help="Timestep T ~ Number of self-attention layers within each U2GNN layer")
 parser.add_argument("--ff_hidden_size", default=256, type=int, help="The hidden size for the feedforward layer")
 parser.add_argument('--fold_idx', type=int, default=1, help='The fold index. 0-9.')
@@ -64,7 +65,7 @@ def get_Adj_matrix(graph):
 
     Adj_block = torch.sparse.FloatTensor(Adj_block_idx, Adj_block_elem, torch.Size([num_node, num_node]))
 
-    return Adj_block.to(device) # implement the Laplacian re-normalized adjacency matrix like in GCN ???
+    return Adj_block.to(device) # should implement and tune for the re-normalized adjacency matrix D^-1/2AD^-1/2 or D^-1A like in GCN/SGC ???
 
 def get_data(graph):
     node_features = graph.node_features
@@ -86,7 +87,8 @@ print("Loading data... finished!")
 model = FullyConnectedGT(feature_dim_size=feature_dim_size, ff_hidden_size=args.ff_hidden_size,
                         num_classes=num_classes, dropout=args.dropout,
                         num_self_att_layers=args.num_timesteps,
-                        num_U2GNN_layers=args.num_hidden_layers).to(device)
+                        num_U2GNN_layers=args.num_hidden_layers,
+                        nhead=1).to(device) # nhead is set to 1 as the size of input feature vectors is odd
 
 def cross_entropy(pred, soft_targets): # use nn.CrossEntropyLoss if not using soft labels in Line 159
     logsoftmax = nn.LogSoftmax(dim=1)

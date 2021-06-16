@@ -7,18 +7,19 @@ from torch.nn import TransformerEncoder, TransformerEncoderLayer
 class FullyConnectedGT(nn.Module):
 
     def __init__(self, feature_dim_size, ff_hidden_size, num_classes,
-                 num_self_att_layers, dropout, num_U2GNN_layers):
+                 num_self_att_layers, dropout, num_U2GNN_layers, nhead):
         super(FullyConnectedGT, self).__init__()
         self.feature_dim_size = feature_dim_size
         self.ff_hidden_size = ff_hidden_size
         self.num_classes = num_classes
         self.num_self_att_layers = num_self_att_layers #Each U2GNN layer consists of a number of self-attention layers
         self.num_U2GNN_layers = num_U2GNN_layers
+        self.nhead = nhead
         self.lst_gnn = torch.nn.ModuleList()
         #
         self.u2gnn_layers = torch.nn.ModuleList()
         for _layer in range(self.num_U2GNN_layers): # nhead=1 because the size of input feature vectors is odd
-            encoder_layers = TransformerEncoderLayer(d_model=self.feature_dim_size, nhead=1, dim_feedforward=self.ff_hidden_size, dropout=0.5)
+            encoder_layers = TransformerEncoderLayer(d_model=self.feature_dim_size, nhead=self.nhead, dim_feedforward=self.ff_hidden_size, dropout=0.5)
             self.u2gnn_layers.append(TransformerEncoder(encoder_layers, self.num_self_att_layers))
             # if _layer != self.num_U2GNN_layers - 1:
             #     self.lst_gnn.append(GraphConvolution(self.feature_dim_size, self.feature_dim_size, act=torch.tanh))
@@ -42,7 +43,7 @@ class FullyConnectedGT(nn.Module):
             input_Tr = torch.unsqueeze(input_Tr, 0)
             input_Tr = self.u2gnn_layers[layer_idx](input_Tr)
             input_Tr = torch.squeeze(input_Tr, 0)
-            # take  a sum over neighbors followed by a linear transformation and an activation function --> similar to GCN
+            # take a sum over neighbors followed by a linear transformation and an activation function --> similar to GCN
             input_Tr = self.lst_gnn[layer_idx](input_Tr, Adj_block)
             # take a sum over all node representations to get graph representations
             graph_embedding = torch.sum(input_Tr, dim=0)
