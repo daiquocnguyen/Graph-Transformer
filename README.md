@@ -23,7 +23,9 @@ This program provides the implementation of our U2GNN as described in [our paper
 
 - 04-05-2021: Release a simplified variant of U2GNN to train a fully-connected graph transformer, wherein we leverage the self-attention mechanism directly on all nodes of a given graph. This U2GNN variant is reliable in case the given graph is fully-connected.
 
-- 17-05-2020: Release a Pytorch (1.5.0) implementation. 
+- 17-05-2020: Release a Pytorch 1.5.0 implementation. 
+
+- 11-12-2019: Release a Tensorflow 1.14 implementation.
 
 ### Requirements
 - Python 	3.x
