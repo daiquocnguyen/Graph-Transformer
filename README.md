@@ -21,7 +21,7 @@ This program provides the implementation of our graph transformer as described i
 
 ### News
 
-- 04-05-2021: Release a simplified variant to train a fully-connected graph transformer, wherein we leverage the self-attention mechanism directly on all nodes of a given graph. This variant is reliable in case the given graph is fully-connected.
+- 04-05-2021: Release a simplified variant (in Pytorch 1.5.0) to train a fully-connected graph transformer, wherein we leverage the self-attention mechanism directly on all nodes of a given graph.
 
 - 17-05-2020: Release a Pytorch 1.5.0 implementation. 
 
