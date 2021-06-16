@@ -21,7 +21,7 @@ This program provides the implementation of our graph transformer as described i
 
 ### News
 
-- 04-05-2021: Release a simplified variant of U2GNN to train a fully-connected graph transformer, wherein we leverage the self-attention mechanism directly on all nodes of a given graph. This U2GNN variant is reliable in case the given graph is fully-connected.
+- 04-05-2021: Release a simplified variant to train a fully-connected graph transformer, wherein we leverage the self-attention mechanism directly on all nodes of a given graph. This variant is reliable in case the given graph is fully-connected.
 
 - 17-05-2020: Release a Pytorch 1.5.0 implementation. 
 
@@ -49,9 +49,9 @@ This program provides the implementation of our graph transformer as described i
 
 
 ## Cite  
-Please cite the paper whenever U2GNN is used to produce published results or incorporated into other software:
+Please cite the paper whenever our graph transformer is used to produce published results or incorporated into other software:
 
-	@article{Nguyen2019U2GNN,
+	@article{Nguyen2019GT,
 		author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
 		title={Universal Self-Attention Network for Graph Classification},
 		journal={arXiv preprint arXiv:1909.11855},
@@ -59,6 +59,6 @@ Please cite the paper whenever U2GNN is used to produce published results or inc
 	}
 
 ## License
-As a free open-source implementation, U2GNN is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. All other warranties including, but not limited to, merchantability and fitness for purpose, whether express, implied, or arising by operation of law, course of dealing, or trade usage are hereby disclaimed. I believe that the programs compute what I claim they compute, but I do not guarantee this. The programs may be poorly and inconsistently documented and may contain undocumented components, features or modifications. I make no guarantee that these programs will be suitable for any application.
+As a free open-source implementation, Graph-Transformer is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. All other warranties including, but not limited to, merchantability and fitness for purpose, whether express, implied, or arising by operation of law, course of dealing, or trade usage are hereby disclaimed. I believe that the programs compute what I claim they compute, but I do not guarantee this. The programs may be poorly and inconsistently documented and may contain undocumented components, features or modifications. I make no guarantee that these programs will be suitable for any application.
 
-U2GNN is licensed under the Apache License 2.0.
+Graph-Transformer is licensed under the Apache License 2.0.
