@@ -14,7 +14,7 @@
 This program provides the implementation of our graph transformer as described in [our paper](https://arxiv.org/pdf/1909.11855.pdf), where we leverage the transformer self-attention network to learn graph representations.
 
 <p align="center">
-	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/U2GNN.png">
+	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/UGT.png">
 </p>
 
 ## Usage
@@ -31,9 +31,9 @@ This program provides the implementation of our graph transformer as described i
 
 - Variant 1: Leveraging the transformer on sampled neighbors of each node:
 
-		$ python train_U2GNN_Sup.py --dataset IMDBBINARY --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 8 --num_epochs 50 --num_timesteps 4 --learning_rate 0.0005 --model_name IMDBBINARY_bs4_fold1_1024_8_idx0_4_1
+		$ python train_UGT_Sup.py --dataset IMDBBINARY --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 8 --num_epochs 50 --num_timesteps 4 --learning_rate 0.0005 --model_name IMDBBINARY_bs4_fold1_1024_8_idx0_4_1
 	
-		$ python train_U2GNN_Sup.py --dataset PTC --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 16 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_bs4_fold1_1024_16_idx0_3_1
+		$ python train_UGT_Sup.py --dataset PTC --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 16 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_bs4_fold1_1024_16_idx0_3_1
 
 - Variant 2: Leveraging the transformer directly on all nodes to train a fully-connected graph transformer:
 		 
@@ -50,7 +50,7 @@ This program provides the implementation of our graph transformer as described i
 ## Cite  
 Please cite the paper whenever our graph transformer is used to produce published results or incorporated into other software:
 
-	@article{Nguyen2019GT,
+	@article{Nguyen2019UGT,
 		author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
 		title={Universal Self-Attention Network for Graph Classification},
 		journal={arXiv preprint arXiv:1909.11855},
