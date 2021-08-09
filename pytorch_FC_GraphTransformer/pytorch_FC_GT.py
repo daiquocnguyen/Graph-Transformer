@@ -22,9 +22,9 @@ class FullyConnectedGT(nn.Module):
             encoder_layers = TransformerEncoderLayer(d_model=self.feature_dim_size, nhead=self.nhead, dim_feedforward=self.ff_hidden_size, dropout=0.5)
             self.u2gnn_layers.append(TransformerEncoder(encoder_layers, self.num_self_att_layers))
             # if _layer != self.num_U2GNN_layers - 1:
-            #     self.lst_gnn.append(GraphConvolution(self.feature_dim_size, self.feature_dim_size, act=torch.tanh))
+            #     self.lst_gnn.append(GraphConvolution(self.feature_dim_size, self.feature_dim_size, act=torch.relu))
             # else:
-            self.lst_gnn.append(GraphConvolution(self.feature_dim_size, self.feature_dim_size, act=torch.tanh))
+            self.lst_gnn.append(GraphConvolution(self.feature_dim_size, self.feature_dim_size, act=torch.relu))
 
         # Linear function
         self.predictions = torch.nn.ModuleList()
@@ -76,7 +76,7 @@ class FullyConnectedGT(nn.Module):
 
 """ GCN layer, similar to https://arxiv.org/abs/1609.02907 """
 class GraphConvolution(torch.nn.Module):
-    def __init__(self, in_features, out_features, act=torch.tanh, bias=False):
+    def __init__(self, in_features, out_features, act=torch.relu, bias=False):
         super(GraphConvolution, self).__init__()
         self.in_features = in_features
         self.out_features = out_features
