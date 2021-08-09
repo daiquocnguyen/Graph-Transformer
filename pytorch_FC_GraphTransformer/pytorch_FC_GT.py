@@ -46,6 +46,7 @@ class FullyConnectedGT(nn.Module):
             # take a sum over neighbors followed by a linear transformation and an activation function --> similar to GCN
             input_Tr = self.lst_gnn[layer_idx](input_Tr, Adj_block)
             # take a sum over all node representations to get graph representations
+            # Can modify the code by placing Lines 49-52 outside the "for" loop to only use the last layer to make a prediction.
             graph_embedding = torch.sum(input_Tr, dim=0)
             graph_embedding = self.dropouts[layer_idx](graph_embedding)
             # Produce the final scores
