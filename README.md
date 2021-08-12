@@ -28,7 +28,7 @@ This program provides the implementation of our graph transformer as described i
 - Variant 2: Leveraging the transformer directly on all nodes to train a fully-connected graph transformer:
 
 <p align="center">
-	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/UGformer_v2.png" width="275">
+	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/UGformer_v2.png" width="225">
 </p>
 		 
 		$ python train_pytorch_Full_GT.py --dataset PTC --ff_hidden_size 1024 --fold_idx 1 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_fold1_1024_idx0_1
