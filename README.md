@@ -36,7 +36,7 @@ This program provides the implementation of our graph transformer as described i
 - Variant 1: Leveraging the transformer on sampled neighbors of each node:
 
 <p align="center">
-	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/UGT.png" width="750">
+	<img src="https://github.com/daiquocnguyen/U2GNN/blob/master/UGformer_v1.png" width="750">
 </p>
 
 		$ python train_UGT_Sup.py --dataset IMDBBINARY --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 8 --num_epochs 50 --num_timesteps 4 --learning_rate 0.0005 --model_name IMDBBINARY_bs4_fold1_1024_8_idx0_4_1
