@@ -126,14 +126,6 @@ def get_batch_data(selected_idx):
 
     return X_concat, input_x, input_y
 
-class Batch_Loader(object):
-    def __call__(self):
-        selected_idx = np.random.permutation(len(graphs))[:args.batch_size]
-        X_concat, input_x, input_y = get_batch_data(selected_idx)
-        return X_concat, input_x, input_y
-
-batch_nodes = Batch_Loader()
-
 print("Loading data... finished!")
 
 model = UGformerV1(feature_dim_size=feature_dim_size, ff_hidden_size=args.ff_hidden_size,
@@ -148,8 +140,12 @@ scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=num_batches_per
 def train():
     model.train() # Turn on the train mode
     total_loss = 0.
-    for _ in range(num_batches_per_epoch):
-        X_concat, input_x, input_y = batch_nodes()
+    indices = np.arange(0, len(graphs))
+    np.random.shuffle(indices)
+    for start in range(0, len(graphs), args.batch_size):
+        end = start + args.batch_size
+        selected_idx = indices[start:end]
+        X_concat, input_x, input_y = get_batch_data(selected_idx)
         optimizer.zero_grad()
         logits = model(X_concat, input_x, input_y)
         loss = torch.sum(logits)
