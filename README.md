@@ -56,7 +56,7 @@ Please cite the paper whenever our graph transformer is used to produce publishe
 
 	@article{Nguyen2019UGT,
 		author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
-		title={Universal Self-Attention Network for Graph Classification},
+		title={Universal Graph Transformer Self-Attention Networks},
 		journal={arXiv preprint arXiv:1909.11855},
 		year={2019}
 	}
