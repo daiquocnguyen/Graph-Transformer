@@ -22,7 +22,7 @@ Variant 1            |  Variant 2
 
 ### News
 
-- 04-05-2021: Release a variant (in Pytorch 1.5.0) to train a fully-connected graph transformer, by leveraging the transformer directly on all nodes of a given graph.
+- 04-05-2021: Release a variant (in Pytorch) to train a fully-connected graph transformer, by leveraging the transformer directly on all nodes of a given graph.
 
 - 17-05-2020: Release a Pytorch 1.5.0 implementation. 
 
@@ -43,7 +43,7 @@ Variant 1            |  Variant 2
 #### Requirements
 - Python 	3.x
 - Tensorflow 	1.14 & Tensor2tensor 1.13
-- Pytorch 1.5.0
+- Pytorch 1.9.0
 - Networkx 	2.3
 - Scikit-learn	0.21.2
 
