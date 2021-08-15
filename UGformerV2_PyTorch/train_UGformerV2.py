@@ -25,7 +25,7 @@ parser = ArgumentParser("UGformer", formatter_class=ArgumentDefaultsHelpFormatte
 
 parser.add_argument("--run_folder", default="../", help="")
 parser.add_argument("--dataset", default="PTC", help="Name of the dataset.")
-parser.add_argument("--learning_rate", default=0.0005, type=float, help="Learning rate")
+parser.add_argument("--learning_rate", default=0.001, type=float, help="Learning rate")
 parser.add_argument("--num_epochs", default=50, type=int, help="Number of training epochs")
 parser.add_argument("--model_name", default='PTC', help="")
 parser.add_argument("--dropout", default=0.5, type=float, help="")
@@ -105,7 +105,7 @@ def train():
         Adj_block, node_features, graph_label = get_data(train_graphs[idx]) # one graph per step. should modify to use "padding" (for node_features and Adj_block) within a batch size???
         graph_label = label_smoothing(graph_label, num_classes)
         optimizer.zero_grad()
-        prediction_score = model.forward(Adj_block, node_features) # forward or simple_forward?
+        prediction_score = model.forward(Adj_block, node_features)
         # loss = criterion(prediction_scores, graph_labels)
         loss = cross_entropy(torch.unsqueeze(prediction_score, 0), graph_label)
         loss.backward()

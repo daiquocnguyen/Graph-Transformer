@@ -19,7 +19,7 @@ class FullyConnectedGT_UGformerV2(nn.Module):
         #
         self.ugformer_layers = torch.nn.ModuleList()
         for _layer in range(self.num_GNN_layers):
-            encoder_layers = TransformerEncoderLayer(d_model=self.feature_dim_size, nhead=self.nhead, dim_feedforward=self.ff_hidden_size, dropout=0.5, batch_first=True)
+            encoder_layers = TransformerEncoderLayer(d_model=self.feature_dim_size, nhead=self.nhead, dim_feedforward=self.ff_hidden_size, dropout=0.5) # Default batch_first=False (seq, batch, feature)
             self.ugformer_layers.append(TransformerEncoder(encoder_layers, self.num_self_att_layers))
             self.lst_gnn.append(GraphConvolution(self.feature_dim_size, self.feature_dim_size, act=torch.relu))
 
@@ -33,15 +33,14 @@ class FullyConnectedGT_UGformerV2(nn.Module):
         # self.prediction = nn.Linear(self.feature_dim_size, self.num_classes)
         # self.dropout = nn.Dropout(dropout)
 
-    # Fine-tune to select forward or simple_forward
     def forward(self, Adj_block, node_features):
         prediction_scores = 0
         input_Tr = node_features
         for layer_idx in range(self.num_GNN_layers):
             # self-attention over all nodes
-            input_Tr = torch.unsqueeze(input_Tr, 0)
+            input_Tr = torch.unsqueeze(input_Tr, 1)  #[seq_length, batch_size=1, dim] for pytorch transformer
             input_Tr = self.ugformer_layers[layer_idx](input_Tr)
-            input_Tr = torch.squeeze(input_Tr, 0)
+            input_Tr = torch.squeeze(input_Tr, 1)
             # take a sum over neighbors followed by a linear transformation and an activation function --> similar to GCN
             input_Tr = self.lst_gnn[layer_idx](input_Tr, Adj_block)
             # take a sum over all node representations to get graph representations
@@ -56,26 +55,6 @@ class FullyConnectedGT_UGformerV2(nn.Module):
         # prediction_scores = self.prediction(graph_embedding)
 
         return prediction_scores
-
-    # def simple_forward(self, Adj_block, node_features):
-    #     prediction_scores = 0
-    #     input_Tr = node_features
-    #     for layer_idx in range(self.num_GNN_layers):
-    #         # # take a sum over neighbors to obtain an input for the transformer self-attention network
-    #         # input_Tr = torch.spmm(Adj_block, input_Tr)
-    #         # self-attention over all nodes
-    #         input_Tr = torch.unsqueeze(input_Tr, 0)
-    #         input_Tr = self.ugformer_layers[layer_idx](input_Tr)
-    #         input_Tr = torch.squeeze(input_Tr, 0)
-    #         # take a sum over neighbors
-    #         input_Tr = torch.spmm(Adj_block, input_Tr)
-    #         # take a sum over all node representations to get graph representations
-    #         graph_embedding = torch.sum(input_Tr, dim=0)
-    #         graph_embedding = self.dropouts[layer_idx](graph_embedding)
-    #         # Produce the final scores
-    #         prediction_scores += self.predictions[layer_idx](graph_embedding)
-    #
-    #     return prediction_scores
 
 
 """ GCN layer, similar to https://arxiv.org/abs/1609.02907 """
