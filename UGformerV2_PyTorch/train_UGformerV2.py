@@ -77,11 +77,6 @@ def get_data(graph):
     graph_label = np.array([graph.label])
     return Adj_block, node_features, torch.from_numpy(graph_label).to(device)
 
-# Adj_block, node_features, graph_label = get_data(train_graphs[1])
-# print(Adj_block)
-# print(node_features)
-# print(graph_label)
-
 print("Loading data... finished!")
 
 model = FullyConnectedGT_UGformerV2(feature_dim_size=feature_dim_size, ff_hidden_size=args.ff_hidden_size,
