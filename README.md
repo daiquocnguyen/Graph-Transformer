@@ -28,13 +28,6 @@ Variant 1            |  Variant 2
 
 - 11-12-2019: Release a Tensorflow 1.14 implementation.
 
-### Requirements
-- Python 	3.x
-- Tensorflow 	1.14 & Tensor2tensor 1.13
-- Pytorch >= 1.5.0
-- Networkx 	2.3
-- Scikit-learn	0.21.2
-
 ### Training
 		
 - Variant 1: Leveraging the transformer on sampled neighbors of each node:
@@ -45,7 +38,13 @@ Variant 1            |  Variant 2
 - Variant 2: Leveraging the transformer directly on all nodes to train a fully-connected graph transformer:
 		 
 		$ python train_UGformerV2.py --dataset PTC --ff_hidden_size 1024 --fold_idx 1 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_fold1_1024_idx0_1
-		
+
+#### Requirements
+- Python 	3.x
+- Tensorflow 	1.14 & Tensor2tensor 1.13
+- Pytorch >= 1.5.0
+- Networkx 	2.3
+- Scikit-learn	0.21.2
 
 ## Cite  
 Please cite the paper whenever our graph transformer is used to produce published results or incorporated into other software:
