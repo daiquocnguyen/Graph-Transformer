@@ -19,7 +19,7 @@ class FullyConnectedGT_UGformerV2(nn.Module):
         #
         self.ugformer_layers = torch.nn.ModuleList()
         for _layer in range(self.num_GNN_layers):
-            encoder_layers = TransformerEncoderLayer(d_model=self.feature_dim_size, nhead=self.nhead, dim_feedforward=self.ff_hidden_size, dropout=0.5)
+            encoder_layers = TransformerEncoderLayer(d_model=self.feature_dim_size, nhead=self.nhead, dim_feedforward=self.ff_hidden_size, dropout=0.5, batch_first=True)
             self.ugformer_layers.append(TransformerEncoder(encoder_layers, self.num_self_att_layers))
             self.lst_gnn.append(GraphConvolution(self.feature_dim_size, self.feature_dim_size, act=torch.relu))
 

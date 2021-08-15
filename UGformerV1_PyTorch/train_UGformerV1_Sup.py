@@ -25,7 +25,7 @@ parser = ArgumentParser("UGformer", formatter_class=ArgumentDefaultsHelpFormatte
 
 parser.add_argument("--run_folder", default="../", help="")
 parser.add_argument("--dataset", default="PTC", help="Name of the dataset.")
-parser.add_argument("--learning_rate", default=0.0005, type=float, help="Learning rate")
+parser.add_argument("--learning_rate", default=0.0001, type=float, help="Learning rate")
 parser.add_argument("--batch_size", default=4, type=int, help="Batch Size")
 parser.add_argument("--num_epochs", default=50, type=int, help="Number of training epochs")
 parser.add_argument("--model_name", default='PTC', help="")

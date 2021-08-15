@@ -20,7 +20,7 @@ class UGformerV1(nn.Module):
         #
         self.ugformer_layers = torch.nn.ModuleList()
         for _ in range(self.num_GNN_layers):
-            encoder_layers = TransformerEncoderLayer(d_model=self.feature_dim_size, nhead=1, dim_feedforward=self.ff_hidden_size, dropout=0.5) # embed_dim must be divisible by num_heads
+            encoder_layers = TransformerEncoderLayer(d_model=self.feature_dim_size, nhead=1, dim_feedforward=self.ff_hidden_size, dropout=0.5, batch_first=True)# embed_dim must be divisible by num_heads
             self.ugformer_layers.append(TransformerEncoder(encoder_layers, self.num_self_att_layers))
         # Linear function
         self.dropouts = nn.Dropout(dropout)
