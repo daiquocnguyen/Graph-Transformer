@@ -111,7 +111,7 @@ def get_batch_data(batch_graph):
         else:
             input_neighbors.append([input_node for _ in range(args.num_neighbors+1)])
     input_x = np.array(input_neighbors)
-    input_x = torch.from_numpy(input_x).to(device)
+    input_x = torch.transpose(torch.from_numpy(input_x), 0, 1).to(device) # [seq_length, batch_size] for pytorch transformer, not [batch_size, seq_length]
     #
     graph_labels = np.array([graph.label for graph in batch_graph])
     graph_labels = torch.from_numpy(graph_labels).to(device)
