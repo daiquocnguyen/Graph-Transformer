@@ -11,7 +11,7 @@
 <a href="https://github.com/daiquocnguyen/U2GNN/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/daiquocnguyen/U2GNN"></a>
 <img alt="GitHub" src="https://img.shields.io/github/license/daiquocnguyen/U2GNN">
 
-This program provides the implementation of our graph transformer as described in [our paper](https://arxiv.org/pdf/1909.11855.pdf), where we leverage the transformer self-attention network to learn graph representations.
+This program provides the implementation of our graph transformer, named UGformer, as described in [our paper](https://arxiv.org/pdf/1909.11855.pdf), where we leverage the transformer self-attention network to learn graph representations.
 
 Variant 1            |  Variant 2
 :-------------------------:|:-------------------------:
@@ -22,7 +22,7 @@ Variant 1            |  Variant 2
 
 ### News
 
-- 04-05-2021: Release a variant (in Pytorch) to train a fully-connected graph transformer, by leveraging the transformer directly on all nodes of a given graph.
+- 04-05-2021: Release a variant (in Pytorch 1.5.0) to train a fully-connected graph transformer, by leveraging the transformer directly on all nodes of a given graph.
 
 - 17-05-2020: Release a Pytorch 1.5.0 implementation. 
 
