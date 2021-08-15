@@ -31,7 +31,7 @@ parser.add_argument("--model_name", default='PTC', help="")
 parser.add_argument("--dropout", default=0.5, type=float, help="")
 parser.add_argument("--num_hidden_layers", default=1, type=int, help="")
 parser.add_argument("--nhead", default=1, type=int, help="")
-parser.add_argument("--num_timesteps", default=1, type=int, help="Timestep T ~ Number of self-attention layers within each UGformer layer")
+parser.add_argument("--num_timesteps", default=1, type=int, help="Number of self-attention layers within each UGformer layer")
 parser.add_argument("--ff_hidden_size", default=256, type=int, help="The hidden size for the feedforward layer")
 parser.add_argument('--fold_idx', type=int, default=1, help='The fold index. 0-9.')
 args = parser.parse_args()
@@ -65,7 +65,7 @@ def get_Adj_matrix(graph):
 
     Adj_block = torch.sparse.FloatTensor(Adj_block_idx, Adj_block_elem, torch.Size([num_node, num_node]))
 
-    return Adj_block.to(device) # should implement and tune for the re-normalized adjacency matrix D^-1/2AD^-1/2 or D^-1A like in GCN/SGC ???
+    return Adj_block.to(device) # can implement and tune for the re-normalized adjacency matrix D^-1/2AD^-1/2 or D^-1A like in GCN/SGC ???
 
 def get_data(graph):
     node_features = graph.node_features
