@@ -31,7 +31,7 @@ Variant 1            |  Variant 2
 ### Requirements
 - Python 	3.x
 - Tensorflow 	1.14 & Tensor2tensor 1.13
-- Pytorch 1.9.0
+- Pytorch >= 1.5.0
 - Networkx 	2.3
 - Scikit-learn	0.21.2
 
