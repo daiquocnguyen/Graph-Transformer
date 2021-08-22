@@ -60,7 +60,7 @@ if "GCN" in args.model:
                     dropout=args.dropout).to(device)
 else:
     model = TextGraphTransformer(feature_dim_size=feature_dim_size,
-                    ff_hidden_size=args.hidden_size,
+                    hidden_size=args.hidden_size,
                     num_classes=num_classes,
                     num_self_att_layers=1,
                     num_GNN_layers=args.num_GNN_layers,

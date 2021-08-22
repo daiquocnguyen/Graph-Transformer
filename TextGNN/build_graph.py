@@ -10,6 +10,8 @@ from tqdm import tqdm
 Modified from https://github.com/CRIPAC-DIG/TextING/blob/master/build_graph.py
 """
 
+"""Sample: python build_graph.py mr 50 path/to/glove/"""
+
 if len(sys.argv) < 4:
 	sys.exit("Use: python build_graph.py <dataset> <word_embedding_dim> <pre_trained_folder>")
 
