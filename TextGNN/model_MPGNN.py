@@ -16,7 +16,7 @@ class TextGraphTransformer(nn.Module):
         for _layer in range(self.num_GNN_layers):
             encoder_layers = TransformerEncoderLayer(d_model=feature_dim_size, nhead=nhead, dim_feedforward=ff_hidden_size, dropout=0.5)  # Default batch_first=False (seq, batch, feature) for pytorch < 1.9.0
             self.gt_layers.append(TransformerEncoder(encoder_layers, num_self_att_layers))
-            self.gcn_layers.append(GraphConvolution(feature_dim_size, feature_dim_size, dropout))
+            self.gcn_layers.append(GraphConvolution(feature_dim_size, feature_dim_size, dropout)) # GCN can be replaced by GatedGNN
         self.prediction = nn.Linear(feature_dim_size, num_classes)
         self.dropout = nn.Dropout(dropout)
 
@@ -61,6 +61,41 @@ class TextGCN(nn.Module):
 
         return prediction_scores
 
+"""https://arxiv.org/abs/1511.05493"""
+class GatedGNN(nn.Module):
+    def __init__(self, feature_dim_size, hidden_size, num_GNN_layers, num_classes, dropout, act=nn.functional.relu):
+        super(GatedGNN, self).__init__()
+        self.num_GNN_layers = num_GNN_layers
+        self.gnnlayers = torch.nn.ModuleList()
+        self.act = act
+        self.emb_encode = nn.Linear(feature_dim_size, hidden_size)
+        self.z0 = nn.Linear(hidden_size, hidden_size)
+        self.z1 = nn.Linear(hidden_size, hidden_size)
+        self.r0 = nn.Linear(hidden_size, hidden_size)
+        self.r1 = nn.Linear(hidden_size, hidden_size)
+        self.h0 = nn.Linear(hidden_size, hidden_size)
+        self.h1 = nn.Linear(hidden_size, hidden_size)
+
+    def gatedGNN(self, x, adj):
+        a = torch.matmul(adj, x)
+        # update gate
+        z0 = self.z0(a)
+        z1 = self.z1(x)
+        z = torch.sigmoid(z0 + z1)
+        # reset gate
+        r = torch.sigmoid(self.r0(a) + self.r1(x))
+        # update embeddings
+        h = self.act(self.h0(a) + self.h1(r * x))
+
+        return h * z + x * (1 - z)
+
+    def forward(self, inputs, adj, mask):
+        x = self.emb_encode(inputs)
+        x = x * mask
+        for idx_layer in range(self.num_GNN_layers):
+            x = self.gatedGNN(x, adj) * mask
+        return x
+    
 """ Simple GCN layer, similar to https://arxiv.org/abs/1609.02907 """
 class GraphConvolution(torch.nn.Module):
     def __init__(self, in_features, out_features, dropout, act=torch.relu, bias=False):
