@@ -128,7 +128,4 @@ for epoch in range(1, args.num_epochs + 1):
         best_epoch = epoch
         best_acc = test_acc
 
-    if epoch > 5 and cost_loss[-1] > np.mean(cost_loss[-6:-1]):
-        scheduler.step()
-
 print("Best acc at epoch ", best_epoch, " : ", best_acc)
