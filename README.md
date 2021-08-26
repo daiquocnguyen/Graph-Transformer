@@ -21,7 +21,7 @@ Variant 1            |  Variant 2
 
 ### News
 
-- 20-08-2021: Release a Pytorch implementation to apply the Variant 2 for text (graph) classification.
+- 20-08-2021: Release a Pytorch implementation to apply the Variant 2 for inductive text (graph) classification.
 
 - 04-05-2021: Release a Pytorch 1.5.0 implementation (i.e., Variant 2) to train a fully-connected graph transformer, by leveraging the transformer directly on all nodes of a given graph.
 
