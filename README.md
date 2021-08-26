@@ -39,7 +39,7 @@ Variant 1            |  Variant 2
 		 
 		$ python train_UGformerV2.py --dataset PTC --ff_hidden_size 1024 --fold_idx 1 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_fold1_1024_idx0_1
 		
-- Applying the Variant 2 for text (graph) classification:
+- Applying the Variant 2 for inductive text classification:
 
 		$ python train_TextGNN.py --dataset mr --learning_rate 0.0005 --batch_size 1024 --num_epochs 100 --num_GNN_layers 3 --hidden_size 256 --model GatedGT --nhead 2
 
