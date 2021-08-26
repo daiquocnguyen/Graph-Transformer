@@ -27,7 +27,7 @@ parser.add_argument("--num_epochs", default=200, type=int, help="Number of train
 parser.add_argument("--dropout", default=0.5, type=float, help="Dropout")
 parser.add_argument("--num_GNN_layers", default=2, type=int, help="Number of hidden layers")
 parser.add_argument("--hidden_size", default=96, type=int)
-parser.add_argument("--model", default="GT", help="GCN, GT")
+parser.add_argument("--model", default="GatedGT", help="GCN, GT, GatedGT")
 parser.add_argument("--nhead", default=2, type=int)
 args = parser.parse_args()
 print(args)
@@ -58,6 +58,16 @@ if "GCN" in args.model:
                     num_GNN_layers=args.num_GNN_layers,
                     num_classes=num_classes,
                     dropout=args.dropout).to(device)
+
+elif "GatedGT" in args.model:
+    model = GatedGT(feature_dim_size=feature_dim_size,
+                    hidden_size=args.hidden_size,
+                    num_classes=num_classes,
+                    num_self_att_layers=1,
+                    num_GNN_layers=args.num_GNN_layers,
+                    nhead=args.nhead,
+                    dropout=args.dropout).to(device)
+
 else:
     model = TextGraphTransformer(feature_dim_size=feature_dim_size,
                     hidden_size=args.hidden_size,
@@ -66,6 +76,7 @@ else:
                     num_GNN_layers=args.num_GNN_layers,
                     nhead=args.nhead,
                     dropout=args.dropout).to(device)
+
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
 num_batches_per_epoch = int((train_y.shape[0] - 1) / args.batch_size) + 1
