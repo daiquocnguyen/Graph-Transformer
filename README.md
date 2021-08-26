@@ -42,7 +42,7 @@ Variant 1            |  Variant 2
 		
 - Applying the Variant 2 for text (graph) classification:
 
-		$ python train_TextGNN.py --dataset mr --learning_rate 0.0005 --batch_size 1024 --num_epochs 100 --num_GNN_layers 3 --hidden_size 256 --model GT --nhead 2
+		$ python train_TextGNN.py --dataset mr --learning_rate 0.0005 --batch_size 1024 --num_epochs 100 --num_GNN_layers 3 --hidden_size 256 --model GatedGT --nhead 2
 
 #### Requirements
 - Python 	3.x
