@@ -9,7 +9,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 """Graph Transformer with Gated GNN"""
 class GatedGT(nn.Module):
     def __init__(self, feature_dim_size, hidden_size, num_classes,
-                 num_self_att_layers, num_GNN_layers, nhead, dropout, act=torch.relu):
+                 num_self_att_layers, num_GNN_layers, nhead, dropout, act=torch.tanh):
         super(GatedGT, self).__init__()
         self.num_GNN_layers = num_GNN_layers
         self.emb_encode = nn.Linear(feature_dim_size, hidden_size)
