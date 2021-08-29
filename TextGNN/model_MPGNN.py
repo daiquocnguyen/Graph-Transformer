@@ -96,7 +96,7 @@ class TextGraphTransformer(nn.Module):
             x = torch.transpose(x, 0, 1) # (batch, seq, feature)
             x = x * mask
             x = self.gcn_layers[idx_layer](x, adj) * mask
-        # soft attention # Only lines 40-42: follow the soft attention of TextING
+        # soft attention
         soft_att = torch.sigmoid(self.soft_att(x))
         x = self.act(self.ln(x))
         x = soft_att * x * mask
@@ -129,7 +129,7 @@ class TextGCN(nn.Module):
                 x = self.gnnlayers[idx_layer](x, adj) * mask
             else: # Residual Connection
                 x += self.gnnlayers[idx_layer](x, adj) * mask
-        # soft attention # Only lines 73-75: follow the soft attention of TextING
+        # soft attention
         soft_att = torch.sigmoid(self.soft_att(x))
         x = self.act(self.ln(x))
         x = soft_att * x * mask
