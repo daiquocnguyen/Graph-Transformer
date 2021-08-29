@@ -76,7 +76,9 @@ else:
                     num_GNN_layers=args.num_GNN_layers,
                     nhead=args.nhead,
                     dropout=args.dropout).to(device)
-
+n_gpu = torch.cuda.device_count()
+if n_gpu > 1:
+    model = torch.nn.DataParallel(model)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
 num_batches_per_epoch = int((train_y.shape[0] - 1) / args.batch_size) + 1
