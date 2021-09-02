@@ -23,7 +23,7 @@ Variant 1            |  Variant 2
 
 - 20-08-2021: Release a Pytorch implementation to apply the Variant 2 for inductive text classification.
 
-- 04-05-2021: Release a Pytorch 1.5.0 implementation (i.e., Variant 2) to train a fully-connected graph transformer, by leveraging the transformer directly on all nodes of a given graph.
+- 04-05-2021: Release a Pytorch 1.5.0 implementation (i.e., Variant 2) to leverage the transformer directly on all nodes of a given graph.
 
 - 17-05-2020: Release a Pytorch 1.5.0 implementation. 
 
@@ -35,7 +35,7 @@ Variant 1            |  Variant 2
 
 		$ python train_UGformerV1_Sup.py --dataset IMDBBINARY --batch_size 4 --ff_hidden_size 1024 --fold_idx 1 --num_neighbors 8 --num_epochs 50 --num_timesteps 4 --learning_rate 0.0005 --model_name IMDBBINARY_bs4_fold1_1024_8_idx0_4_1
 	
-- Variant 2: Leveraging the transformer directly on all nodes to train a fully-connected graph transformer:
+- Variant 2: Leveraging the transformer directly on all nodes of the input graph:
 		 
 		$ python train_UGformerV2.py --dataset PTC --ff_hidden_size 1024 --fold_idx 1 --num_epochs 50 --num_timesteps 3 --learning_rate 0.0005 --model_name PTC_fold1_1024_idx0_1
 		
