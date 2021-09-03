@@ -106,6 +106,7 @@ class TextGraphTransformer(nn.Module):
         prediction_scores = self.prediction(graph_embeddings)
         return prediction_scores
 
+"""New advanced TextGCN using Residual Connection"""
 class TextGCN(nn.Module):
     def __init__(self, feature_dim_size, hidden_size, num_GNN_layers, num_classes, dropout, act=torch.relu):
         super(TextGCN, self).__init__()
