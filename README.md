@@ -41,7 +41,7 @@ Variant 1            |  Variant 2
 		
 - Applying the Variant 2 for inductive text classification:
 
-		$ python train_TextGNN.py --dataset mr --learning_rate 0.0005 --batch_size 1024 --num_epochs 100 --num_GNN_layers 3 --hidden_size 256 --model GT --nhead 2
+		$ python train_TextGNN.py --dataset mr --learning_rate 0.0001 --batch_size 4096 --num_epochs 150 --num_GNN_layers 2 --hidden_size 384 --model GatedGT
 
 #### Requirements
 - Python 	3.x
