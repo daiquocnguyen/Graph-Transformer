@@ -23,7 +23,7 @@ Variant 1            |  Variant 2
 
 - 20-08-2021: Release a Pytorch implementation to apply the Variant 2 for inductive text classification.
 
-- 04-05-2021: Release a Pytorch 1.5.0 implementation (i.e., Variant 2) to leverage the transformer directly on all nodes of a given graph.
+- 04-05-2021: Release a Pytorch 1.5.0 implementation (i.e., Variant 2) to leverage the transformer directly on the input graph.
 
 - 17-05-2020: Release a Pytorch 1.5.0 implementation. 
 
