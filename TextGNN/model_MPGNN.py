@@ -58,8 +58,8 @@ class GatedGT(nn.Module):
         soft_att = torch.sigmoid(self.soft_att(x))
         x = self.act(self.ln(x))
         x = soft_att * x * mask
-        # sum/mean and max pooling
-        graph_embeddings = torch.sum(x, 1) * torch.amax(x, 1)
+        # sum and max pooling
+        graph_embeddings = torch.sum(x, 1) + torch.amax(x, 1)
         graph_embeddings = self.dropout(graph_embeddings)
         prediction_scores = self.prediction(graph_embeddings)
 
@@ -101,7 +101,7 @@ class TextGraphTransformer(nn.Module):
         x = self.act(self.ln(x))
         x = soft_att * x * mask
         # sum and max pooling
-        graph_embeddings = torch.sum(x, 1) * torch.amax(x, 1) # '*' is better than '+' used in TextING
+        graph_embeddings = torch.sum(x, 1) + torch.amax(x, 1) 
         graph_embeddings = self.dropout(graph_embeddings)
         prediction_scores = self.prediction(graph_embeddings)
         return prediction_scores
@@ -135,7 +135,7 @@ class TextGCN(nn.Module):
         x = self.act(self.ln(x))
         x = soft_att * x * mask
         # sum and max pooling
-        graph_embeddings = torch.sum(x, 1) * torch.amax(x, 1) # '*' is better than '+' used in TextING
+        graph_embeddings = torch.sum(x, 1) + torch.amax(x, 1) 
         graph_embeddings = self.dropout(graph_embeddings)
         prediction_scores = self.prediction(graph_embeddings)
 
