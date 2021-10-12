@@ -58,7 +58,7 @@ class GatedGT(nn.Module):
         soft_att = torch.sigmoid(self.soft_att(x))
         x = self.act(self.ln(x))
         x = soft_att * x * mask
-        # sum and max pooling
+        # sum and max pooling, following https://openreview.net/pdf?id=wVFkD13GpeX
         graph_embeddings = torch.sum(x, 1) * torch.amax(x, 1)
         graph_embeddings = self.dropout(graph_embeddings)
         prediction_scores = self.prediction(graph_embeddings)
@@ -100,13 +100,13 @@ class TextGraphTransformer(nn.Module):
         soft_att = torch.sigmoid(self.soft_att(x))
         x = self.act(self.ln(x))
         x = soft_att * x * mask
-        # sum and max pooling
+        # sum and max pooling, following https://openreview.net/pdf?id=wVFkD13GpeX
         graph_embeddings = torch.sum(x, 1) * torch.amax(x, 1) 
         graph_embeddings = self.dropout(graph_embeddings)
         prediction_scores = self.prediction(graph_embeddings)
         return prediction_scores
 
-"""New advanced TextGCN using Residual Connection"""
+"""New advanced GCN using Residual Connection, following https://openreview.net/pdf?id=wVFkD13GpeX"""
 class TextGCN(nn.Module):
     def __init__(self, feature_dim_size, hidden_size, num_GNN_layers, num_classes, dropout, act=torch.relu):
         super(TextGCN, self).__init__()
@@ -134,7 +134,7 @@ class TextGCN(nn.Module):
         soft_att = torch.sigmoid(self.soft_att(x))
         x = self.act(self.ln(x))
         x = soft_att * x * mask
-        # sum and max pooling
+        # sum and max pooling, following https://openreview.net/pdf?id=wVFkD13GpeX
         graph_embeddings = torch.sum(x, 1) * torch.amax(x, 1) 
         graph_embeddings = self.dropout(graph_embeddings)
         prediction_scores = self.prediction(graph_embeddings)
