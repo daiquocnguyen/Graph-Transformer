@@ -16,7 +16,7 @@ Variant 1            |  Variant 2
 :-------------------------:|:-------------------------:
 ![](https://github.com/daiquocnguyen/U2GNN/blob/master/UGformer_v1.png)  |  ![](https://github.com/daiquocnguyen/U2GNN/blob/master/UGformer_v2.png)
 
-- Furthermore, in [this early version](https://arxiv.org/pdf/1909.11855v9.pdf), we present an "unsupervised transductive" learning approach to train UGformer for graph classification. 
+- Furthermore, in [this early version](https://arxiv.org/pdf/1909.11855v9.pdf), we present an "unsupervised transductive" learning approach to train GNNs for graph classification. 
 
 ## Usage
 
