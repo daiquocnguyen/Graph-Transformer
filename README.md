@@ -28,7 +28,7 @@ Variant 1            |  Variant 2
 
 - 17-05-2020: Release a Pytorch 1.5.0 implementation. 
 
-- 11-12-2019: Release a Tensorflow 1.14 implementation.
+- 11-12-2019: Release a Tensorflow 1.14 implementation for unsupervised transductive and supervised inductive settings.
 
 ### Training
 		
