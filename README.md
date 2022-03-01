@@ -44,6 +44,11 @@ Variant 1            |  Variant 2
 
 		$ python train_TextGNN.py --dataset mr --learning_rate 0.0001 --batch_size 4096 --num_epochs 150 --num_GNN_layers 2 --hidden_size 384 --model GatedGT
 
+- Applying an unsupervised transductive setting for graph classification: 
+
+		$ python train_UGformerV1_UnSup.py --dataset PTC --batch_size 2 --degree_as_tag --ff_hidden_size 1024 --num_neighbors 4 --num_sampled 512 --num_epochs 50 --num_timesteps 2 --learning_rate 0.0001 --model_name PTC_bs2_dro05_1024_4_idx0_2_2
+
+
 #### Requirements
 - Python 	3.x
 - Tensorflow 	1.14 & Tensor2tensor 1.13
