@@ -21,6 +21,7 @@ Variant 1            |  Variant 2
 ## Usage
 
 ### News
+- 05-03-2022: Our Graph Transformer paper has been accepted to the Poster and Demo Track at The ACM Web Conference 2022.
 
 - 20-08-2021: Release a Pytorch implementation to apply the Variant 2 for inductive text classification.
 
@@ -59,11 +60,11 @@ Variant 1            |  Variant 2
 ## Cite  
 Please cite the paper whenever our graph transformer is used to produce published results or incorporated into other software:
 
-	@article{Nguyen2019UGT,
+	@inproceedings{NguyenUGformer,
 		author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
 		title={Universal Graph Transformer Self-Attention Networks},
-		journal={arXiv preprint arXiv:1909.11855},
-		year={2019}
+		booktitle={Proceedings of TheWebConf 2022 (Poster and Demo Track)},
+		year={2022}
 	}
 
 ## License
