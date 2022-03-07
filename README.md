@@ -10,13 +10,12 @@
 <a href="https://github.com/daiquocnguyen/U2GNN/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/daiquocnguyen/U2GNN"></a>
 <img alt="GitHub" src="https://img.shields.io/github/license/daiquocnguyen/U2GNN">
 
-- This program provides the implementation of our graph transformer, named UGformer, as described in [our paper](https://arxiv.org/pdf/1909.11855.pdf), where we leverage the transformer self-attention network to learn graph representations.
+This program provides the implementation of our graph transformer, named UGformer, as described in [our paper](https://arxiv.org/pdf/1909.11855.pdf), where we leverage the transformer self-attention network to learn graph representations in both supervised inductive setting and unsupervised transductive setting.
 
 Variant 1            |  Variant 2
 :-------------------------:|:-------------------------:
 ![](https://github.com/daiquocnguyen/U2GNN/blob/master/UGformer_v1.png)  |  ![](https://github.com/daiquocnguyen/U2GNN/blob/master/UGformer_v2.png)
 
-- Furthermore, in [this early version](https://arxiv.org/pdf/1909.11855v9.pdf), we present an "unsupervised transductive" learning approach to train GNNs for graph classification. 
 
 ## Usage
 
@@ -29,7 +28,7 @@ Variant 1            |  Variant 2
 
 - 17-05-2020: Release a Pytorch 1.5.0 implementation. 
 
-- 11-12-2019: Release a Tensorflow 1.14 implementation for unsupervised transductive and supervised inductive settings.
+- 11-12-2019: Release a Tensorflow 1.14 implementation for both supervised inductive setting and unsupervised transductive setting.
 
 ### Training
 		
