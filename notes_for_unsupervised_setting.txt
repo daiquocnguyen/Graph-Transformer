@@ -1,4 +1,4 @@
-Note that we follow some unsupervised approaches (such as DGK, Graph2Vec, and AWE) to use all nodes from the entire dataset (i.e., including all nodes in the test set) during training our "unsupervised" GCN baseline and UGformer models. 
+Note that we follow some unsupervised approaches (such as DGK and AWE) to use all nodes from the entire dataset (i.e., including all nodes in the test set) during training our "unsupervised transductive" GCN and UGformer models. 
 You should change to the `log_uniform` directory to perform `make` to build `SampledSoftmax`, and then add the `log_uniform` directory to your PYTHONPATH.
 
 Regarding our unsupervised learning:
