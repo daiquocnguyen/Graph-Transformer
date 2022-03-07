@@ -1,7 +1,8 @@
-Note that we follow some unsupervised approaches (such as DGK and AWE) to use all nodes from the entire dataset (i.e., including all nodes in the test set) during training our "unsupervised transductive" GCN and UGformer models. 
-You should change to the `log_uniform` directory to perform `make` to build `SampledSoftmax`, and then add the `log_uniform` directory to your PYTHONPATH.
+Regarding our unsupervised transductive learning:
 
-Regarding our unsupervised learning:
++ Note that we follow some unsupervised approaches (such as DGK and AWE) to use all nodes from the entire dataset (i.e., including all nodes in the test set) during training our "unsupervised transductive" GCN and UGformer models. 
+
++ Regarding Pytorch, you should change to the `log_uniform` directory to perform `make` to build `SampledSoftmax`, and then add the `log_uniform` directory to your PYTHONPATH.
 
 	$ python train_UGformerV1_UnSup.py --dataset IMDBBINARY --batch_size 2 --ff_hidden_size 1024 --num_neighbors 8 --num_sampled 512 --num_epochs 50 --num_timesteps 1 --learning_rate 0.0001 --model_name IMDBBINARY_bs2_dro05_1024_8_idx0_1_2
 	
