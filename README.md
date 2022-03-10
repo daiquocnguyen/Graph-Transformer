@@ -62,7 +62,7 @@ Please cite the paper whenever our graph transformer is used to produce publishe
 	@inproceedings{NguyenUGformer,
 		author={Dai Quoc Nguyen and Tu Dinh Nguyen and Dinh Phung},
 		title={Universal Graph Transformer Self-Attention Networks},
-		booktitle={Proceedings of the Web Conference WWW 2022 (Poster and Demo Track)},
+		booktitle={Companion Proceedings of the Web Conference 2022 (WWW '22 Companion)},
 		year={2022}
 	}
 
