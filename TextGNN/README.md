@@ -1,5 +1,7 @@
 ### Graph Transformer (UGformer v2) for Inductive Text Classification
 
+- Pytorch >= 1.7.0
+
 - Download `glove.6B.300d.txt` from [http://nlp.stanford.edu/data/glove.6B.zip](http://nlp.stanford.edu/data/glove.6B.zip) and unzip to `TextGNN`.
 
 - Step 1: Build a text graph for each textual document:
